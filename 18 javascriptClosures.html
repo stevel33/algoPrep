@@ -1,0 +1,38 @@
+<button id="btn-0">Button 1!</button>
+<button id="btn-1">Button 2!</button>
+<button id="btn-2">Button 3!</button>
+
+<script type="text/javascript">
+    var prizes = ['A Unicorn!', 'A Hug!', 'Fresh Laundry!'];
+    for (var btnNum = 0; btnNum < prizes.length; btnNum++) {
+        // for each of our buttons, when the user clicks it...
+        document.getElementById('btn-' + btnNum).onclick = function() {
+            // tell her what she's won!
+            alert(prizes[btnNum]);
+        };
+    }
+</script>
+
+buttons will result in undefined, because when the button gets clicked, it'll think btnNum is 3...prizes[3] doesnt exist
+whe function accesses a variable outside its scope, it accesses the actual variable, not the "frozen" value. so when variable changes, function gets that new value
+
+arguments passed by value vs. passed by reference
+
+<button id="btn-0">Button 1!</button>
+<button id="btn-1">Button 2!</button>
+<button id="btn-2">Button 3!</button>
+
+<script type="text/javascript">
+    var prizes = ['A Unicorn!', 'A Hug!', 'Fresh Laundry!'];
+    for (var btnNum = 0; btnNum < prizes.length; btnNum++) {
+        // for each of our buttons, when the user clicks it...
+        document.getElementById('btn-' + btnNum).onclick = function(frozenBtnNum){
+            return function() {
+                // tell her what she's won!
+                alert(prizes[frozenBtnNum]);
+            };
+        }(btnNum);  // LOOK! We're passing btnNum to our anonymous function here!
+    }
+</script>
+
+
